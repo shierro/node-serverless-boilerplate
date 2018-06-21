@@ -1,0 +1,6 @@
+/_optimize
+/.nyc_output
+/.serverless
+/node_modules
+/coverage
+/mochawesome-reports

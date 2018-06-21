@@ -1,0 +1,161 @@
+service: node-serverless-boilerplate
+
+parameters:
+  region: &region ap-southeast-2
+  path: &path /
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: ${env:STAGE, 'dev'}
+  region: *region
+
+  environment:
+    DYNAMODB_TABLE: ${env:STAGE}-node-serverless-boilerplate
+    NODE_ENV: ${env:NODE_ENV}
+    STAGE: ${env:STAGE}
+    APP_ROUTE: ${env:APP_ROUTE}
+  
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - lambda:InvokeFunction
+        - lambda:InvokeAsync
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+        - s3:PutObject
+        - s3:PutObjectAcl
+        - s3:GetObject
+        - s3:GetObjectAcl
+        - s3:DeleteObject
+        - s3:PutAccelerateConfiguration
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+    - Effect: Allow
+      Action:
+        - lambda:InvokeFunction
+      Resource: '*'
+
+resources:
+  Resources:
+    Users:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 10
+          WriteCapacityUnits: 10
+        TableName: ${self:provider.environment.DYNAMODB_TABLE}
+
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-dynamodb-local
+  - serverless-dynamodb-autoscaling
+  - serverless-offline-scheduler
+  - serverless-plugin-optimize
+  - serverless-domain-manager
+  - serverless-add-api-key
+  - serverless-offline
+package:
+  individually: true
+
+functions:
+  app:
+    handler: src/index.handler
+    name: ${env:STAGE}-node-serverless-boilerplate
+    events:
+        - http:
+            path: /
+            method: ANY
+            cors: true
+            private: true
+            # integration: lambda
+            authorizer:
+              name: authorizer
+              arn: ${self:custom.userPools.${env:STAGE}}
+        - http:
+            path: /{any+}
+            method: ANY
+            cors: true
+            private: true
+            # integration: lambda
+            authorizer:
+              name: authorizer
+              arn: ${self:custom.userPools.${env:STAGE}}
+  warmer:
+    handler: src/workers/warmer.handler
+    name: ${env:STAGE}-node-serverless-boilerplate-warmer
+    memorySize: 128
+    timeout: 30
+    description: Warms up your app to prevent cold starts
+    events:
+      - schedule:
+          name: ${env:STAGE}-node-serverless-boilerplate-warmer
+          description: 'Warms up your app to prevent cold starts - ${env:STAGE}'
+          rate: rate(1 minute)
+
+custom:
+  dynamodb:
+    start:
+      port: ${env:DYNAMODB_PORT}
+      inMemory: false
+      dbPath: ${env:PWD}/db
+      migrate: true
+      seed: true
+      # noStart: true
+
+  # NEED TO UPDATE: userPools
+  userPools:
+    prod: arn:aws:cognito-idp:ap-southeast-2:XXXXXXXXXXXX:userpool/ap-southeast-2_XXXXXXXXXXXX
+    staging: arn:aws:cognito-idp:ap-southeast-2:XXXXXXXXXXXX:userpool/ap-southeast-2_XXXXXXXXXXXX
+    dev: arn:aws:cognito-idp:ap-southeast-2:XXXXXXXXXXXX:userpool/ap-southeast-2_XXXXXXXXXXXX
+    
+  optimize:
+    debug: true
+    minify: true
+    plugins: ['transform-object-rest-spread']
+    includePaths: ['.env.example']
+
+  stage: ${opt:stage, self:provider.stage}
+
+  # NEED TO UPDATE: domains
+  domains:
+    prod: api.yourdomain.com
+    staging: api-staging.yourdomain.com
+    dev: api-dev.yourdomain.com
+  
+  # NEED TO UPDATE: customDomain - certificateName
+  customDomain:
+    basePath: ${env:APP_ROUTE}
+    certificateName: '*.yourdomain.com'
+    domainName: ${self:custom.domains.${self:custom.stage}}
+    stage: ${self:provider.stage}
+    createRoute53Record: true
+
+  apikey: ${self:service}-${env:STAGE}
+
+  capacities:
+    - table: Users  # DynamoDB Resource
+      read:
+        minimum: 10        # Minimum read capacity
+        maximum: 1000     # Maximum read capacity
+        usage: 0.5       # Targeted usage percentage
+      write:
+        minimum: 10       # Minimum write capacity
+        maximum: 200      # Maximum write capacity
+        usage: 0.5        # Targeted usage percentage
+
+  dotenv:
+    include:
+      - NODE_ENV
+      - APP_ROUTE
+      - DYNAMODB_PORT
