@@ -1,6 +1,6 @@
 {
   "name": "node-serverless-boilerplate",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "NodeJS serverless boilerplate",
   "engines": {
     "node": ">=7.6"
