@@ -27,6 +27,13 @@ after_script:
   - codecov -f coverage/lcov.info --disable=gcov
 
 notifications:
-  slack: $SLACK_ID
+  slack:
+    rooms:
+      - ninjaro:clZjvDamAByBYA004CYcYlH6#build
+    on_success: change # default: always
+    on_failure: always # default: always
   email:
-    - $SLACK_EMAIL
+    recipients:
+      - theodoro.pelingan@gmail.com
+    on_success: never # default: change
+    on_failure: always # default: always
