@@ -11,7 +11,19 @@
 
 - Opinionated NodeJS boilerplate for a AWS serverless app
 
-## Built-in modules/libraries
+## Why would you want to use this boilerplate?
+- You plan to use DynamoDB as your data storage
+- You want to use an ORM
+- You want to use a simple `x-api-token` as your authorizer
+- You want to leverage ExpressJS(for a lot of good reasons) on a serverless environment
+- You want to be able to work locally on your machine
+- You want to bundle you app before you deploy
+- You want to prevent your app to prevent cold starts
+- 
+
+## This boilerplate has the following modules/plugins included
+
+### Modules - Application layer
 - serverless-http - Enable an express app to work seamlessly with serverless  
 - dynogels - DynamoDB ORM
 - Dotenv-safe - environment manager
@@ -19,31 +31,33 @@
 - Eslint - linter - Base:AirBnB
 - Winston - Logger
 
-## Requirements
-  - NodeJS v7.6+
-  - NPM v4+
-  - serverless
-
-## Serverless plugins used
+### Plugins - Serverless layer
   - serverless-dotenv-plugin
   - serverless-dynamodb-local
-  - serverless-offline-scheduler
+  - serverless-dynamodb-autoscaling
   - serverless-plugin-optimize
   - serverless-domain-manager
+  - serverless-add-api-key
+  - serverless-prune-plugin
+  - serverless-plugin-warmup
   - serverless-offline
+
+## Requirements
+  - NodeJS v7.6+
+  - Yarn v1.5+
 
 ## Set-up & install
 ```
-$ npm install serverless -g
+$ yarn global add serverless
 $ git clone https://github.com/shierro/node-serverless-boilerplate <project_name>
-$ cd <project_name> && npm install
-$ npm run db:install
+$ cd <project_name> && yarn install
+$ yarn db:install
 ```
-## Add your serverless config
+## Cuztomize serverless config
 ```
 $ cp serverless-template.yml serverless.yml
 ```
-Change serverless.yml dummy config according to your needs
+Change serverless.yml dummy config to match your needs.
 
 ## Set your Environment vars
 ```
@@ -53,23 +67,23 @@ Change .env vars with the actual values
 
 ## Serverless Dev(offline) mode
 ```
-$ STAGE=dev npm start
+$ STAGE=dev API_KEY=LOCAL yarn start
 ```
 
 ## Deploy your application
 ```
 $ /* Deploy to dev */
-$ APP_ROUTE=users STAGE=dev npm run deploy
+$ APP_ROUTE=users STAGE=dev yarn deploy
 
 $ /* Deploy to staging */
-$ APP_ROUTE=users STAGE=staging npm run deploy
+$ APP_ROUTE=users STAGE=staging yarn deploy
 
 $ /* Deploy to prod */
-$ APP_ROUTE=users STAGE=prod npm run deploy
+$ APP_ROUTE=users STAGE=prod yarn deploy
 ```
 
 ## run unit tests & generate coverage
 ```
-$ npm run cover
+$ yarn cover
 ```
 

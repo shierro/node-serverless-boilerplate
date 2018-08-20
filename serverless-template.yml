@@ -9,12 +9,14 @@ provider:
   runtime: nodejs8.10
   stage: ${env:STAGE, 'dev'}
   region: *region
+  versionFunctions: true
 
   environment:
     DYNAMODB_TABLE: ${env:STAGE}-node-serverless-boilerplate
     NODE_ENV: ${env:NODE_ENV}
     STAGE: ${env:STAGE}
     APP_ROUTE: ${env:APP_ROUTE}
+    API_KEY: ${env:API_KEY}
   
   iamRoleStatements:
     - Effect: Allow
@@ -60,65 +62,31 @@ plugins:
   - serverless-dotenv-plugin
   - serverless-dynamodb-local
   - serverless-dynamodb-autoscaling
-  - serverless-offline-scheduler
   - serverless-plugin-optimize
   - serverless-domain-manager
   - serverless-add-api-key
+  - serverless-prune-plugin
+  - serverless-plugin-warmup
   - serverless-offline
-package:
-  individually: true
 
 functions:
   app:
     handler: src/index.handler
     name: ${env:STAGE}-node-serverless-boilerplate
+    warmup: true
     events:
         - http:
             path: /
             method: ANY
             cors: true
             private: true
-            # integration: lambda
-            authorizer:
-              name: authorizer
-              arn: ${self:custom.userPools.${env:STAGE}}
         - http:
             path: /{any+}
             method: ANY
             cors: true
             private: true
-            # integration: lambda
-            authorizer:
-              name: authorizer
-              arn: ${self:custom.userPools.${env:STAGE}}
-  warmer:
-    handler: src/workers/warmer.handler
-    name: ${env:STAGE}-node-serverless-boilerplate-warmer
-    memorySize: 128
-    timeout: 30
-    description: Warms up your app to prevent cold starts
-    events:
-      - schedule:
-          name: ${env:STAGE}-node-serverless-boilerplate-warmer
-          description: 'Warms up your app to prevent cold starts - ${env:STAGE}'
-          rate: rate(1 minute)
 
 custom:
-  dynamodb:
-    start:
-      port: ${env:DYNAMODB_PORT}
-      inMemory: false
-      dbPath: ${env:PWD}/db
-      migrate: true
-      seed: true
-      # noStart: true
-
-  # NEED TO UPDATE: userPools
-  userPools:
-    prod: arn:aws:cognito-idp:ap-southeast-2:XXXXXXXXXXXX:userpool/ap-southeast-2_XXXXXXXXXXXX
-    staging: arn:aws:cognito-idp:ap-southeast-2:XXXXXXXXXXXX:userpool/ap-southeast-2_XXXXXXXXXXXX
-    dev: arn:aws:cognito-idp:ap-southeast-2:XXXXXXXXXXXX:userpool/ap-southeast-2_XXXXXXXXXXXX
-    
   optimize:
     debug: true
     minify: true
@@ -128,20 +96,20 @@ custom:
   stage: ${opt:stage, self:provider.stage}
 
   # NEED TO UPDATE: domains
-  domains:
-    prod: api.yourdomain.com
-    staging: api-staging.yourdomain.com
-    dev: api-dev.yourdomain.com
+  # domains:
+  #   prod: serverless.yourdomain.com
+  #   staging: serverless-staging.yourdomain.com
+  #   dev: serverless-dev.yourdomain.com
   
   # NEED TO UPDATE: customDomain - certificateName
-  customDomain:
-    basePath: ${env:APP_ROUTE}
-    certificateName: '*.yourdomain.com'
-    domainName: ${self:custom.domains.${self:custom.stage}}
-    stage: ${self:provider.stage}
-    createRoute53Record: true
+  # customDomain:
+  #   basePath: ${env:APP_ROUTE}
+  #   certificateName: '*.yourdomain.com'
+  #   domainName: ${self:custom.domains.${self:custom.stage}}
+  #   stage: ${self:provider.stage}
+  #   createRoute53Record: true
 
-  apikey: ${self:service}-${env:STAGE}
+  apikey: ${env:API_KEY}
 
   capacities:
     - table: Users  # DynamoDB Resource
@@ -154,8 +122,13 @@ custom:
         maximum: 200      # Maximum write capacity
         usage: 0.5        # Targeted usage percentage
 
+  prune:
+    automatic: true
+    number: 3
+
   dotenv:
     include:
       - NODE_ENV
       - APP_ROUTE
       - DYNAMODB_PORT
+      - API_KEY
