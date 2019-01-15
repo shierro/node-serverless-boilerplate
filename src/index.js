@@ -1,6 +1,5 @@
-const { getPath } = require('./utils/file');
 require('dotenv-safe').config({
-  example: getPath('.env.example'),
+  example: require('./utils/file').getPath('.env.example'),
 });
 
 const { NODE_ENV, PORT } = process.env;
@@ -10,9 +9,9 @@ const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const cors = require('cors');
 const compression = require('compression');
+const serverless = require('serverless-http');
 const routes = require('./routes');
 const logger = require('./utils/logger');
-const serverless = require('serverless-http');
 
 const app = express();
 

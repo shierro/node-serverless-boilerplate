@@ -1,8 +1,8 @@
 const winston = require('winston');
 
 /* istanbul ignore next */
-const logger = process.env.NODE_ENV !== 'test' ?
-  winston.createLogger({
+const logger = process.env.NODE_ENV !== 'test'
+  ? winston.createLogger({
     transports: [
       new (winston.transports.Console)({
         level: process.env.LOG_LEVEL || 'debug',
@@ -14,8 +14,8 @@ const logger = process.env.NODE_ENV !== 'test' ?
         timestamp: true,
       }),
     ],
-  }) :
-  {
+  })
+  : {
     log: () => { },
     info: () => { },
     warn: () => { },
@@ -31,4 +31,3 @@ logger.logStream = {
 };
 
 module.exports = logger;
-

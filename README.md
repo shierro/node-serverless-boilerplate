@@ -17,8 +17,8 @@
 - You want to use a simple `x-api-token` as your authorizer
 - You want to leverage ExpressJS(for a lot of good reasons) on a serverless environment
 - You want to be able to work locally on your machine
-- You want to bundle you app before you deploy
-- You want to prevent your app from having cold starts
+- You want to bundle you app before you deploy(smaller builds)
+- You want to prevent your app from having cold starts(concurrency configurable) [see concurrency option](https://github.com/FidelLimited/serverless-plugin-warmup#options-that-can-be-overridden-per-function)
 - You want to be able to version your app & save last X number of versions(3 default)
 
 ## This boilerplate has the following modules/plugins included
