@@ -14,5 +14,4 @@ pipelines:
           - npm install yarn -g
           - yarn install
           - yarn run lint
-          - yarn run nsp
           - yarn run cover

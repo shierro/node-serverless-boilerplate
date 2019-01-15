@@ -16,7 +16,6 @@ before_script:
 
 script:
   - yarn lint
-  - yarn nsp
   - nyc --reporter=lcov yarn cover
 
 after_script:
