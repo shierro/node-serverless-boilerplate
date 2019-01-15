@@ -1,7 +1,7 @@
 const express = require('express');
 
-const UsersController = require('./controllers/UsersController');
-const ErrorController = require('./controllers/ErrorController');
+const UsersController = require('./controllers/Users');
+const ErrorController = require('./controllers/Error');
 
 const { NODE_ENV, APP_ROUTE } = process.env;
 

@@ -1,7 +1,7 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
 const request = require('supertest');
-const usersService = require('../services/usersService');
+const usersService = require('../services/users');
 const { app } = require('../index');
 
 const { APP_ROUTE } = process.env;

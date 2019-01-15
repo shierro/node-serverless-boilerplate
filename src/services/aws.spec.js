@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const awsService = require('./awsService');
+const awsService = require('./aws');
 
 describe('src/services/awsService.js', () => {
   it('should get lambda instance successfully', () => {

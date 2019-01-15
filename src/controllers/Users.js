@@ -1,5 +1,5 @@
 const logger = require('../utils/logger');
-const usersService = require('../services/usersService');
+const usersService = require('../services/users');
 
 const UsersController = {
   getUser: async (req, res, next) => {

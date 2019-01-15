@@ -1,6 +1,6 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
-const usersService = require('./usersService');
+const usersService = require('./users');
 const Users = require('../models/Users');
 
 describe('src/services/usersService.js', () => {
