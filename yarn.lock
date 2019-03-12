@@ -4290,10 +4290,10 @@ serve-static@1.13.2:
     parseurl "~1.3.2"
     send "0.16.2"
 
-serverless-add-api-key@^2.1.3:
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/serverless-add-api-key/-/serverless-add-api-key-2.1.3.tgz#d39a6d128d62612b40c7b89cb939368c2893b39f"
-  integrity sha512-xBd2hOD/U1l0H4jtL//DO8a5U6D/a0BXM9oSJolIRv9uDAQYa07BopRDMYGBk03Uz4rnR0XAY5pHr/PjHGAdbg==
+serverless-add-api-key@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/serverless-add-api-key/-/serverless-add-api-key-3.1.0.tgz#02581f88e411e7ff973f1dd4cff8d67656567888"
+  integrity sha512-XJsJLH4858bd3bhT4E5XmOMQbshT0M2BrL5ppVTH54WdGX9vNCeqcfytBIUSVa3erdA35f0GHCjo2p7/TINqwA==
   dependencies:
     aws-sdk "^2.245.1"
     chalk "^2.4.1"
