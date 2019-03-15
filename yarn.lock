@@ -831,7 +831,7 @@ aws-sdk@2.131.0:
     xml2js "0.4.17"
     xmlbuilder "4.2.1"
 
-aws-sdk@^2.177.0, aws-sdk@^2.245.1, aws-sdk@^2.7.0:
+aws-sdk@^2.177.0, aws-sdk@^2.7.0:
   version "2.259.1"
   resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.259.1.tgz#df4814b65d5654f250d097951aa84e27a472b5aa"
   dependencies:
@@ -849,6 +849,21 @@ aws-sdk@^2.388.0:
   version "2.388.0"
   resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.388.0.tgz#de3f8f5576ccaa3477fe66529bdd1546250e8325"
   integrity sha512-2yycFVn90H61R3vbE+4Yqn8AEOS88oOE1wUsm6aUhsk+i/Y707a85C166gKuE3+if4y8IS5qqQJiX+HUtF0KNw==
+  dependencies:
+    buffer "4.9.1"
+    events "1.1.1"
+    ieee754 "1.1.8"
+    jmespath "0.15.0"
+    querystring "0.2.0"
+    sax "1.2.1"
+    url "0.10.3"
+    uuid "3.3.2"
+    xml2js "0.4.19"
+
+aws-sdk@^2.421.0:
+  version "2.422.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.422.0.tgz#d875ca4098ced6f47d466f4c7addf8a79332651f"
+  integrity sha512-t/hUQcRVhbw3EPS84d7YqwIAMSXHT5V/s6m0ivgLjIXnzRng0qRD1KGTkoLkXnY+X/o/NdvVIIfLfO4VF8xqMw==
   dependencies:
     buffer "4.9.1"
     events "1.1.1"
@@ -4290,12 +4305,12 @@ serve-static@1.13.2:
     parseurl "~1.3.2"
     send "0.16.2"
 
-serverless-add-api-key@^2.1.3:
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/serverless-add-api-key/-/serverless-add-api-key-2.1.3.tgz#d39a6d128d62612b40c7b89cb939368c2893b39f"
-  integrity sha512-xBd2hOD/U1l0H4jtL//DO8a5U6D/a0BXM9oSJolIRv9uDAQYa07BopRDMYGBk03Uz4rnR0XAY5pHr/PjHGAdbg==
+serverless-add-api-key@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/serverless-add-api-key/-/serverless-add-api-key-3.2.0.tgz#90489a8b772154f39d1b54593157d1ad814b8c40"
+  integrity sha512-ZPgHPTYAMH9UWiK2ku0NDKODwNwAkVzDG2P4yj7oJpckAvG+Y9+GFQlxyCr828cGU0AxjzXl7qSOzQ56cUsWsw==
   dependencies:
-    aws-sdk "^2.245.1"
+    aws-sdk "^2.421.0"
     chalk "^2.4.1"
 
 serverless-domain-manager@^2.6.11:
