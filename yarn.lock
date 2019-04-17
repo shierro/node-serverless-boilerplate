@@ -619,6 +619,11 @@
     array-from "^2.1.1"
     lodash.get "^4.4.2"
 
+"@types/aws-lambda@^8.10.19":
+  version "8.10.24"
+  resolved "https://registry.yarnpkg.com/@types/aws-lambda/-/aws-lambda-8.10.24.tgz#89a20cd91957322e26dbfea7f651b970460c8c0c"
+  integrity sha512-9F70bcb2oBGZUZCyisE1Ap3vwgt04uiSmr4s9mhQf89vBrttgraBs2Rc8l9YrKiemCndCH7wxnYNWk5qEuv6rA==
+
 JSONStream@^1.0.3:
   version "1.3.3"
   resolved "https://registry.yarnpkg.com/JSONStream/-/JSONStream-1.3.3.tgz#27b4b8fbbfeab4e71bcf551e7f27be8d952239bf"
@@ -1357,6 +1362,13 @@ center-align@^0.1.1:
   dependencies:
     align-text "^0.1.3"
     lazy-cache "^1.0.3"
+
+chai-as-promised@^7.1.1:
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/chai-as-promised/-/chai-as-promised-7.1.1.tgz#08645d825deb8696ee61725dbf590c012eb00ca0"
+  integrity sha512-azL6xMoi+uxu6z4rhWQ1jbdUhOMhis2PvscD/xjLqNMkv3BPPp2JyyuTHOrf9BOosGpNQ11v6BKv/g57RXbiaA==
+  dependencies:
+    check-error "^1.0.2"
 
 chai@^4.2.0:
   version "4.2.0"
@@ -4332,10 +4344,14 @@ serverless-dynamodb-local@0.2.30:
     dynamodb-localhost "^0.0.5"
     lodash "^4.17.0"
 
-serverless-http@^1.8.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/serverless-http/-/serverless-http-1.8.0.tgz#b91736c31c8dc3aa1c0832a89e9852f37206125c"
-  integrity sha512-zLQp6iPvnJUPQ7r7rqSUQEoeK/1FQnS/4KYpP/lMcgbvIv1nOf+3mQn+ATUUz0Sjh4991oug7tnHjaDp/xWcdQ==
+serverless-http@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/serverless-http/-/serverless-http-2.0.0.tgz#c9f50419c298c1277f798b149e2bc4d54a2494ce"
+  integrity sha512-1Sa+PMRhvg2EkEwGuyrQLcKEJMU97YBYH14+TKV6UyY1WAqlasb477GZI9fNTX3nOvt65+tEbatTPlDDvZ1ykQ==
+  dependencies:
+    chai-as-promised "^7.1.1"
+  optionalDependencies:
+    "@types/aws-lambda" "^8.10.19"
 
 serverless-offline@^4.0.0:
   version "4.0.0"
