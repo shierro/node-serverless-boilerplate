@@ -831,7 +831,7 @@ aws-sdk@2.131.0:
     xml2js "0.4.17"
     xmlbuilder "4.2.1"
 
-aws-sdk@^2.177.0, aws-sdk@^2.245.1, aws-sdk@^2.7.0:
+aws-sdk@^2.177.0, aws-sdk@^2.7.0:
   version "2.259.1"
   resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.259.1.tgz#df4814b65d5654f250d097951aa84e27a472b5aa"
   dependencies:
@@ -853,6 +853,21 @@ aws-sdk@^2.388.0:
     buffer "4.9.1"
     events "1.1.1"
     ieee754 "1.1.8"
+    jmespath "0.15.0"
+    querystring "0.2.0"
+    sax "1.2.1"
+    url "0.10.3"
+    uuid "3.3.2"
+    xml2js "0.4.19"
+
+aws-sdk@^2.421.0:
+  version "2.540.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.540.0.tgz#3a636c32f48e657904f5b38592c057ceb87ae535"
+  integrity sha512-CQdXuMED/xPW7y50vObadERIzrVB6Zr87Ln9RIm3VyJuIWUWS92Z7DKAe9F+LdFh1/6zKVd/iLDJ7Fsd/pAEmA==
+  dependencies:
+    buffer "4.9.1"
+    events "1.1.1"
+    ieee754 "1.1.13"
     jmespath "0.15.0"
     querystring "0.2.0"
     sax "1.2.1"
@@ -2677,6 +2692,11 @@ iconv-lite@^0.4.24:
   dependencies:
     safer-buffer ">= 2.1.2 < 3"
 
+ieee754@1.1.13:
+  version "1.1.13"
+  resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.1.13.tgz#ec168558e95aa181fd87d37f55c32bbcb6708b84"
+  integrity sha512-4vf7I2LYV/HaWerSo3XmlMkp5eZ83i+/CDluXi/IGTs/O1sejBNhTtnxzmRZfvOUqj7lZjqHkeTvpgSFDlWZTg==
+
 ieee754@1.1.8:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.1.8.tgz#be33d40ac10ef1926701f6f08a2d86fbfd1ad3e4"
@@ -4290,12 +4310,12 @@ serve-static@1.13.2:
     parseurl "~1.3.2"
     send "0.16.2"
 
-serverless-add-api-key@^2.1.3:
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/serverless-add-api-key/-/serverless-add-api-key-2.1.3.tgz#d39a6d128d62612b40c7b89cb939368c2893b39f"
-  integrity sha512-xBd2hOD/U1l0H4jtL//DO8a5U6D/a0BXM9oSJolIRv9uDAQYa07BopRDMYGBk03Uz4rnR0XAY5pHr/PjHGAdbg==
+serverless-add-api-key@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/serverless-add-api-key/-/serverless-add-api-key-4.0.2.tgz#58991421503662a770848144fc55cb5c22c5cc47"
+  integrity sha512-SSPUBVvs6DePXVgEItxMd3MYarpDH5yZqsTgxHtyYfFRt4gjae8iR3DNFxbH7dIrOj2MqYe438BK17tozbtTUQ==
   dependencies:
-    aws-sdk "^2.245.1"
+    aws-sdk "^2.421.0"
     chalk "^2.4.1"
 
 serverless-domain-manager@^2.6.11:
