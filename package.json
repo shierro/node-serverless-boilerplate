@@ -37,7 +37,7 @@
     "undeploy": "sls remove"
   },
   "dependencies": {
-    "aws-sdk": "^2.388.0",
+    "aws-sdk": "^2.655.0",
     "body-parser": "^1.18.3",
     "compression": "^1.7.3",
     "cors": "^2.8.5",
