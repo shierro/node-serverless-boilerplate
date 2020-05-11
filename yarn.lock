@@ -619,6 +619,11 @@
     array-from "^2.1.1"
     lodash.get "^4.4.2"
 
+"@types/aws-lambda@^8.10.19":
+  version "8.10.51"
+  resolved "https://registry.yarnpkg.com/@types/aws-lambda/-/aws-lambda-8.10.51.tgz#7ad774507a3cf1d2e949ca305380c23b5af635a0"
+  integrity sha512-XK7RerpXj4r+IO0r7qIeNqUSU6L4qhPMwNhISxozJJiUX/jdXj9WYzTShRVisEcUQHXgJ4TTBqTArM8f9Mjb8g==
+
 JSONStream@^1.0.3:
   version "1.3.3"
   resolved "https://registry.yarnpkg.com/JSONStream/-/JSONStream-1.3.3.tgz#27b4b8fbbfeab4e71bcf551e7f27be8d952239bf"
@@ -4332,10 +4337,12 @@ serverless-dynamodb-local@0.2.30:
     dynamodb-localhost "^0.0.5"
     lodash "^4.17.0"
 
-serverless-http@^1.8.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/serverless-http/-/serverless-http-1.8.0.tgz#b91736c31c8dc3aa1c0832a89e9852f37206125c"
-  integrity sha512-zLQp6iPvnJUPQ7r7rqSUQEoeK/1FQnS/4KYpP/lMcgbvIv1nOf+3mQn+ATUUz0Sjh4991oug7tnHjaDp/xWcdQ==
+serverless-http@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/serverless-http/-/serverless-http-2.4.1.tgz#bd110da62f3b5f0ae58b213aa6dbe71ddb9b7db4"
+  integrity sha512-DUul/WeN/QFrDPLqrWf330tWhkmyIbmz5yR6YKfoxJ7P6fr1Hxs0VhpY3gweRKyEasvxHi+ck2apj5Ktk/PRqA==
+  optionalDependencies:
+    "@types/aws-lambda" "^8.10.19"
 
 serverless-offline@^4.0.0:
   version "4.0.0"
